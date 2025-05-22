@@ -1,120 +1,116 @@
+# 📦 Gestión de Tipos y Propiedades
 
-# Prueba Fortex – Gestión de Tipos y Propiedades
+**Next.js • React • Material UI • TypeScript**
 
-Este proyecto es una interfaz frontend desarrollada con **Next.js**, **React** y **Material UI**. Su propósito es gestionar dos entidades principales: **Tipos** y **Propiedades**. Se utiliza **React Context API** para simular un backend mediante datos mock y se implementa un sistema básico de autenticación con roles (admin y viewer) para controlar el acceso a determinadas funcionalidades.
+Una interfaz responsiva y moderna para administrar dos entidades principales: **Tipos** y **Propiedades**, con control de acceso por roles (admin/viewer) y persistencia en archivos JSON mediante rutas API de Next.js.
+
+---
+## 📑 Tabla de Contenidos
+
+- [Características](#-características)
+- [Instalación](#-instalación)
+- [Scripts disponibles](#-scripts-disponibles)
+- [Arquitectura](#-arquitectura)
+- [Contextos](#-contextos)
+- [API Routes](#-api-routes)
+- [Temas y Diseño](#-temas-y-diseño)
+- [Mejoras Futuras](#-mejoras-futuras)
+- [Licencia](#-licencia)
+
+---
+## 🎯 Características
+
+- **CRUD completo** de Tipos y Propiedades (Create / Read / Update / Delete)
+- **Buscador con debounce** (400 ms) para optimizar la experiencia del usuario
+- **Drawer forms** para creación y edición sin recargar la página
+- **Control de acceso** por roles (**admin** ve todos los botones; **viewer** solo puede leer)
+- **Persistencia local** en JSON a través de rutas API de Next.js
+- **Diseño elegante** con tema oscuro y acentos púrpura, adaptado a móviles
 
 ---
 
-## Instrucciones de Instalación y Ejecución
-
-1. **Clonar el repositorio:**
+## 🛠 Instalación
 
 ```bash
-git clone https://github.com/NotBunBun/prueba-fortex.git
-cd prueba-fortex
+# Clonar repositorio
+git clone https://github.com/NotBunBun/prueba-.git
+cd prueba-
+# Instalar dependencias
+npm install
+
+# Levantar servidor de desarrollo
+npm run dev         # http://localhost:3000
 ```
 
-2. **Instalar dependencias:** Si existen conflictos de peer dependencies, puedes usar:
+> Si hay conflictos de **peer dependencies**, prueba:
+> ```bash
+> npm install --legacy-peer-deps
+> ```
 
-```bash
-npm install --legacy-peer-deps
+---
+## 📋 Scripts disponibles
+
+| Comando          | Descripción                                         |
+| ---------------- | --------------------------------------------------- |
+| `yarn dev`       | Levanta el servidor de desarrollo                   |
+| `yarn build`     | Genera la app para producción                       |
+| `yarn start`     | Arranca la app en modo producción                   |
+| `yarn lint`      | Ejecuta ESLint para revisar estilo y errores comunes |
+| `yarn test`      | Ejecuta tests (por implementar)                     |
+
+---
+## 🏗 Arquitectura
+
 ```
-
-o, si es necesario:
-
-```bash
-npm install --force
-```
-
-3. **Ejecutar en modo desarrollo:**
-
-```bash
-npm run dev
-```
-
-La aplicación se abrirá en [http://localhost:3000](http://localhost:3000).
-
-4. **(Opcional) Compilar para producción y arrancar el servidor:**
-
-```bash
-npm run build
-npm run start
+src/
+├─ app/
+│  ├─ components/       # UI genéricos (Drawers, Tablas, Layout)
+│  ├─ context/          # AuthContext & DataContext
+│  └─ theme/            # Configuración de Material UI
+pages/
+├─ api/
+│  ├─ tipos/           # CRUD JSON en data/tipos.json
+│  └─ propiedades/     # CRUD JSON en data/propiedades.json
+└─ tipos/              # Páginas de gestión de Tipos
+└─ propiedades/        # Páginas de gestión de Propiedades
+/public/
+└─ background.png     # Imagen de fondo principal
+/data/
+├─ tipos.json
+└─ propiedades.json
 ```
 
 ---
+## 🔑 Contextos
 
-## Explicación de la Arquitectura
-
-### Next.js
-
-- Utiliza Next.js para gestionar las rutas y el renderizado híbrido (server/client).
-- Las páginas se definen en la carpeta `pages/`, donde cada subcarpeta representa una sección (por ejemplo, `/tipos` y `/propiedades`).
-
-### React y Material UI
-
-- La interfaz se desarrolla con React y se usan los componentes de Material UI para lograr un diseño moderno, responsivo y profesional.
-- Se ha configurado un tema personalizado (`theme/index.ts`) para mantener una coherencia en la paleta de colores (70/20/10).
-
-### React Context API
-
-Se implementan dos contextos:
-
-- **DataContext**: Administra datos mock para Tipos y Propiedades, junto con funciones CRUD para crear, editar y eliminar.
-- **AuthContext**: Simula la autenticación de un usuario, definiendo roles (admin y viewer) para controlar el acceso a funcionalidades críticas.
-
-### Componentes Reutilizables
-
-- Se han creado componentes como `DrawerFormTipo` y `DrawerFormPropiedad` para los formularios en Drawer, y componentes de tabla que utilizan DataGrid para listar los datos con funcionalidades de búsqueda (con debounce) y paginación.
-
-### Control de Acceso
-
-- Dependiendo del rol del usuario (definido en `AuthContext`), se muestran u ocultan botones de creación, edición y eliminación.
+- **AuthContext**: controla el usuario simulado (roles `admin` | `viewer`).
+- **DataContext**: sincroniza estado con `/api/...` para Tipos y Propiedades.
 
 ---
+## 🔌 API Routes
 
-## Decisiones Técnicas y Justificación
+- **`GET  /api/tipos`** → Listar todos los tipos
+- **`POST /api/tipos`** → Crear un nuevo tipo
+- **`GET  /api/tipos/[id]`** → Obtener tipo por ID
+- **`PUT  /api/tipos/[id]`** → Actualizar un tipo existente
+- **`DELETE /api/tipos/[id]`** → Eliminar un tipo
 
-### Next.js
-
-- Se eligió Next.js para aprovechar el renderizado híbrido y la estructura de rutas bien definida, lo que facilita la escalabilidad y el rendimiento del proyecto.
-
-### React Context API para Datos Mock
-
-- Permite simular un backend sin necesidad de integrarlo realmente, facilitando el desarrollo y la realización de pruebas rápidas de CRUD.
-
-### Material UI
-
-- Se utiliza Material UI por su amplia colección de componentes predefinidos, capacidad de personalización y diseño responsivo. El tema personalizado con un esquema de color 70/20/10 ayuda a lograr una interfaz limpia y agradable a la vista.
-
-### Sistema de Roles (admin/viewer)
-
-- Se implementó un `AuthContext` básico para simular un usuario autenticado con roles, lo que permite mostrar u ocultar funcionalidades sensibles (como edición y eliminación) según el rol del usuario.
-
-### Debounce en Búsqueda
-
-- Se implementó un debounce de 400 ms en los campos de búsqueda para evitar que se ejecuten procesos en cada pulsación, optimizando el rendimiento y la experiencia del usuario.
-
-### Uso de Drawers para Formularios
-
-- Los formularios para crear y editar se presentan en Drawers, permitiendo una experiencia de usuario fluida sin recargar la página.
+Análogo para **`/api/propiedades`**.
 
 ---
+## 🎨 Temas y Diseño
 
-## Mejoras Futuras
-
-- **Integración con un Backend Real**: Reemplazar el `DataContext` por llamadas a una API REST o GraphQL para manejar datos de forma real.
-- **Indicadores de Carga**: Implementar spinners o skeleton loaders para mejorar la experiencia durante la carga de datos.
-- **Validaciones y Manejo de Errores**: Agregar validaciones más robustas en los formularios y proporcionar mensajes de error claros a los usuarios.
-- **Optimización del Tipado**: Reducir el uso de `any` y reforzar el tipado para mejorar la mantenibilidad y robustez del código.
-- **Pruebas Automatizadas**: Agregar pruebas unitarias e integración para asegurar la estabilidad y calidad del código a lo largo del tiempo.
+- **Paleta**: fondo `#0a0a0a`, overlay `#0e0220`, acento `#6e00cc`–`#b55eff`.
+- **Tipografía**: `Playfair Display` para títulos, `Roboto` para cuerpo.
+- **Responsive**: breakpoints móviles, tablet y escritorio.
+- **Microinteracciones**: hover con **scale(1.02)** y **glow**.
 
 ---
+## 🛠 Mejoras Futuras
 
-## Conclusión
+- Integración con un **backend real** (REST o GraphQL)
+- Indicadores de **carga** (spinners, skeletons)
+- Validaciones avanzadas y manejo de errores en formularios
+- **Tests** unitarios e integración (Jest, React Testing Library)
+- Mejorar accesibilidad (WCAG)
 
-Este proyecto cumple con los siguientes requerimientos de la prueba técnica:
-
-- **Gestión Completa de Tipos y Propiedades**: Listado, búsqueda, creación, edición y eliminación mediante formularios en Drawer.
-- **Datos Mock con React Context API**: Simulación de un backend con funciones CRUD.
-- **Diseño y Estilo**: Interfaz moderna, responsiva y agradable utilizando Material UI y un esquema de color 70/20/10.
-- **Simulación de Autenticación**: Implementación de un sistema básico de roles (admin y viewer) para controlar el acceso a funcionalidades críticas.
