@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1747874194683,
+    "nombre": "111",
+    "descripcion": "111",
+    "propiedades": [],
+    "createdAt": "2025-05-22T00:36:34.683Z"
+  },
+  {
+    "id": 1747874630888,
+    "nombre": "Ola",
+    "descripcion": "prueba",
+    "propiedades": [
+      1747874492595
+    ],
+    "createdAt": "2025-05-22T00:43:50.888Z"
+  }
+]

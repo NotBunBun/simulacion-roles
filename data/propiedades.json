@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1747874492595,
+    "nombre": "Womp womp",
+    "tipoPropiedad": "check",
+    "createdAt": "2025-05-22T00:41:32.595Z"
+  },
+  {
+    "id": 1747874614663,
+    "nombre": "Prueba 2",
+    "tipoPropiedad": "texto",
+    "createdAt": "2025-05-22T00:43:34.663Z"
+  }
+]

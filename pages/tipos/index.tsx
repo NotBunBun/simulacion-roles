@@ -1,80 +1,71 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Box, Button, TextField, Paper } from '@mui/material';
+'use client'
+
+import React, { useContext, useState, ChangeEvent } from 'react';
+import NextLink from 'next/link';
+import {
+  Container,
+  Box,
+  Typography,
+  Button,
+  Stack,
+  TextField,
+  Paper,
+} from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddIcon from '@mui/icons-material/Add';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import DrawerFormTipo from '../../src/app/components/DrawerFormTipo';
 import { DataContext, Tipo } from '../../src/app/context/DataContext';
 import { AuthContext } from '../../src/app/context/AuthContext';
-import DrawerFormTipo from '../../src/app/components/DrawerFormTipo';
 
-export default function TiposPage() {
-  const { tipos, addTipo, updateTipo, deleteTipo, propiedades } = useContext(DataContext);
+export default function GestionTipos() {
+  const { tipos, propiedades, addTipo, updateTipo, deleteTipo } = useContext(DataContext);
   const { user } = useContext(AuthContext);
-  
   const [search, setSearch] = useState('');
-  const [filteredTipos, setFilteredTipos] = useState<Tipo[]>(tipos);
-
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [editData, setEditData] = useState<Tipo | null>(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const lower = search.toLowerCase();
-      if (!lower) {
-        setFilteredTipos(tipos);
-      } else {
-        setFilteredTipos(tipos.filter((t) => t.nombre.toLowerCase().includes(lower)));
-      }
-    }, 400);
-    return () => clearTimeout(timer);
-  }, [search, tipos]);
+  const filtered = tipos.filter((t) =>
+    t.nombre.toLowerCase().includes(search.toLowerCase())
+  );
 
-  const columns: GridColDef<Tipo>[] = [
+  const rows = filtered.map((t) => ({
+    id: t.id,
+    nombre: t.nombre,
+    descripcion: t.descripcion,
+    propiedades: t.propiedades.length,
+    fechaCreacion: new Date(t.createdAt).toLocaleDateString(),
+  }));
+
+  const columns: GridColDef[] = [
     { field: 'nombre', headerName: 'Nombre', flex: 1 },
     { field: 'descripcion', headerName: 'Descripción', flex: 1 },
-    {
-      field: 'propiedades',
-      headerName: 'Propiedades Asignadas',
-      flex: 1,
-      valueGetter: (params) => {
-        return params.row?.propiedades?.length ?? 0;
-      },
-    },
-    {
-      field: 'fechaCreacion',
-      headerName: 'Fecha de Creación',
-      flex: 1,
-      valueGetter: (params) => {
-        const rawDate = params.row?.fechaCreacion;
-        if (!rawDate) return '';
-        if (rawDate instanceof Date) {
-          return rawDate.toLocaleDateString();
-        }
-        const parsed = new Date(rawDate);
-        return isNaN(parsed.getTime()) ? '' : parsed.toLocaleDateString();
-      },
-    },
+    { field: 'propiedades', headerName: 'Propiedades Asignadas', type: 'number', flex: 1 },
+    { field: 'fechaCreacion', headerName: 'Fecha de Creación', flex: 1 },
     {
       field: 'acciones',
       headerName: 'Acciones',
-      flex: 1,
       sortable: false,
+      flex: 1,
       renderCell: (params) => {
-        const row = params.row as Tipo;
-        if (user?.role !== 'admin') return null;
+        const t = filtered.find((x) => x.id === params.row.id);
+        if (!t || user?.role !== 'admin') return null;
         return (
           <>
             <Button
-              variant="outlined"
               size="small"
-              onClick={() => handleEdit(row)}
+              variant="outlined"
+              color="secondary"
+              onClick={() => { setEditData(t); setDrawerOpen(true); }}
               sx={{ mr: 1 }}
             >
               Editar
             </Button>
             <Button
-              variant="outlined"
               size="small"
+              variant="outlined"
               color="error"
-              onClick={() => handleDelete(row.id)}
+              onClick={() => deleteTipo(t.id)}
             >
               Eliminar
             </Button>
@@ -84,55 +75,72 @@ export default function TiposPage() {
     },
   ];
 
-  const handleCreate = () => {
-    setEditData(null);
-    setDrawerOpen(true);
-  };
-
-  const handleEdit = (tipo: Tipo) => {
-    setEditData(tipo);
-    setDrawerOpen(true);
-  };
-
-  const handleDelete = (id: number) => {
-    if (confirm('¿Eliminar este Tipo?')) {
-      deleteTipo(id);
-    }
-  };
-
   const handleSubmit = (data: { nombre: string; descripcion: string; propiedades: number[] }) => {
-    if (editData) {
-      updateTipo({ ...editData, ...data });
-    } else {
-      addTipo(data);
-    }
+    if (editData) updateTipo({ ...editData, ...data });
+    else addTipo(data);
     setDrawerOpen(false);
     setEditData(null);
   };
 
   return (
-    <Box sx={{ p: 2 }}>
-      <h2>Gestión de Tipos</h2>
-      <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
+        <Button
+          component={NextLink}
+          href="/"
+          variant="outlined"
+          color="secondary"
+          startIcon={<ArrowBackIcon />}
+        >
+          Volver
+        </Button>
+        <Typography variant="h2" color="secondary.main">
+          Gestión de Tipos
+        </Typography>
+      </Stack>
+
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        spacing={2}
+        alignItems="center"
+        sx={{ mb: 3 }}
+      >
         <TextField
           label="Buscar Tipos"
+          variant="outlined"
+          size="small"
+          color="secondary"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+          sx={{ flex: 1 }}
         />
         {user?.role === 'admin' && (
-          <Button variant="contained" onClick={handleCreate}>
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<AddIcon />}
+            onClick={() => { setEditData(null); setDrawerOpen(true); }}
+          >
             Crear Tipo
           </Button>
         )}
-      </Box>
+      </Stack>
 
-      <Paper elevation={1} sx={{ p: 2, borderRadius: '8px' }}>
-        <Box sx={{ height: 400, width: '100%' }}>
-          <DataGrid<Tipo>
-            rows={filteredTipos}
+      <Paper
+        elevation={3}
+        sx={{ bgcolor: 'background.paper', borderRadius: 2, overflow: 'hidden' }}
+      >
+        <Box sx={{ height: 500, width: '100%' }}>
+          <DataGrid
+            rows={rows}
             columns={columns}
             getRowId={(row) => row.id}
             pageSizeOptions={[5, 10]}
+            initialState={{ pagination: { paginationModel: { pageSize: 5 } } }}
+            sx={{
+              '.MuiDataGrid-columnHeaders, .MuiDataGrid-footerContainer': { borderColor: 'secondary.main' },
+              '.MuiDataGrid-cell': { borderColor: 'secondary.main' },
+            }}
           />
         </Box>
       </Paper>
@@ -144,6 +152,6 @@ export default function TiposPage() {
         initialData={editData}
         propiedadesDisponibles={propiedades.map((p) => ({ id: p.id, nombre: p.nombre }))}
       />
-    </Box>
+    </Container>
   );
 }

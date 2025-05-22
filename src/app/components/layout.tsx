@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 import { Container } from '@mui/material';
-import NavBar from './NavBar';
-
 interface LayoutProps {
   children: ReactNode;
 }
@@ -9,8 +7,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
-      <NavBar />
-      <Container maxWidth="md" sx={{ mt: 4 }}>
+      <Container disableGutters maxWidth={false} sx={{ p: 0, mt: 4 }}>
         {children}
       </Container>
     </>

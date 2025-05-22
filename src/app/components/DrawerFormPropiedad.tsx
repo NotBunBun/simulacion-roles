@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import {
   Drawer,
@@ -8,13 +10,15 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Typography,
+  Stack,
 } from '@mui/material';
 
 interface DrawerFormPropiedadProps {
   open: boolean;
   onClose: () => void;
   onSubmit: (data: { nombre: string; tipoPropiedad: string }) => void;
-  initialData?: any;
+  initialData?: { nombre: string; tipoPropiedad: string };
 }
 
 export default function DrawerFormPropiedad({
@@ -29,7 +33,7 @@ export default function DrawerFormPropiedad({
   useEffect(() => {
     if (initialData) {
       setNombre(initialData.nombre);
-      setTipoProp(initialData.tipoPropiedad);
+      setTipoProp(initialData.tipoPropiedad as any);
     } else {
       setNombre('');
       setTipoProp('texto');
@@ -43,21 +47,37 @@ export default function DrawerFormPropiedad({
 
   return (
     <Drawer anchor="right" open={open} onClose={onClose}>
-      <Box sx={{ width: 320, p: 2 }}>
-        <h2>{initialData ? 'Editar Propiedad' : 'Crear Propiedad'}</h2>
+      <Box
+        sx={{
+          width: { xs: '80vw', sm: 400 },
+          bgcolor: 'background.paper',
+          color: 'text.primary',
+          p: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+        }}
+      >
+        <Typography variant="h5" color="secondary.main">
+          {initialData ? 'Editar Propiedad' : 'Crear Propiedad'}
+        </Typography>
+
         <TextField
           label="Nombre"
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
           fullWidth
-          margin="normal"
+          variant="outlined"
+          color="secondary"
         />
-        <FormControl fullWidth margin="normal">
+
+        <FormControl fullWidth>
           <InputLabel>Tipo de Propiedad</InputLabel>
           <Select
             value={tipoProp}
             label="Tipo de Propiedad"
             onChange={(e) => setTipoProp(e.target.value as any)}
+            color="secondary"
           >
             <MenuItem value="texto">Texto</MenuItem>
             <MenuItem value="numero">Número</MenuItem>
@@ -65,9 +85,26 @@ export default function DrawerFormPropiedad({
             <MenuItem value="check">Check</MenuItem>
           </Select>
         </FormControl>
-        <Button variant="contained" onClick={handleSave} sx={{ mt: 2 }}>
-          Guardar
-        </Button>
+
+        <Stack direction="row" justifyContent="flex-end" spacing={1} sx={{ mt: 2 }}>
+          <Button variant="outlined" color="secondary" onClick={onClose}>
+            Cancelar
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleSave}
+            sx={{
+              transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+              '&:hover': {
+                transform: 'scale(1.02)',
+                boxShadow: '0 0 12px rgba(142,0,204,0.6)',
+              },
+            }}
+          >
+            Guardar
+          </Button>
+        </Stack>
       </Box>
     </Drawer>
   );

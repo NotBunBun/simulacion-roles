@@ -1,84 +1,56 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Box, Button, TextField } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import { DataContext } from '../../src/app/context/DataContext';
+'use client';
+
+import NextLink from 'next/link';
+import { useContext, useState, useEffect, ChangeEvent } from 'react';
+import {
+  Container,
+  Typography,
+  Button,
+  Stack,
+  TextField,
+  Paper,
+  Box
+} from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddIcon from '@mui/icons-material/Add';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataContext, Propiedad } from '../../src/app/context/DataContext';
 import { AuthContext } from '../../src/app/context/AuthContext';
 import DrawerFormPropiedad from '../../src/app/components/DrawerFormPropiedad';
 
-export default function PropiedadesPage() {
-  const { propiedades, addPropiedad, updatePropiedad, deletePropiedad } = useContext(DataContext);
+export default function GestionPropiedades() {
+  const {
+    propiedades,
+    addPropiedad,
+    updatePropiedad,
+    deletePropiedad
+  } = useContext(DataContext);
   const { user } = useContext(AuthContext);
 
   const [search, setSearch] = useState('');
-  const [rows, setRows] = useState<any[]>(propiedades);
+  const [rows, setRows] = useState<Propiedad[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [editData, setEditData] = useState<any | null>(null);
+  const [editData, setEditData] = useState<Propiedad | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const lower = search.toLowerCase();
-      if (!lower) {
-        setRows(propiedades);
-      } else {
-        setRows(propiedades.filter((p: any) => p.nombre.toLowerCase().includes(lower)));
-      }
-    }, 400);
-    return () => clearTimeout(timer);
+    setRows(
+      propiedades
+        .filter((p) =>
+          p.nombre.toLowerCase().includes(search.toLowerCase())
+        )
+        .map((p) => ({
+          ...p,
+          fechaCreacion: new Date(p.createdAt).toLocaleDateString()
+        }))
+    );
   }, [search, propiedades]);
-
-  const columns: any[] = [
-    { field: 'nombre', headerName: 'Nombre', flex: 1 },
-    { field: 'tipoPropiedad', headerName: 'Tipo de Propiedad', flex: 1 },
-    {
-      field: 'fechaCreacion',
-      headerName: 'Fecha de Creación',
-      flex: 1,
-      valueGetter: (params: any) => {
-        const fecha = params.row?.fechaCreacion;
-        if (!fecha) return '';
-        if (fecha instanceof Date) return fecha.toLocaleDateString();
-        const parsed = new Date(fecha);
-        return isNaN(parsed.getTime()) ? '' : parsed.toLocaleDateString();
-      },
-    },
-    {
-      field: 'acciones',
-      headerName: 'Acciones',
-      flex: 1,
-      sortable: false,
-      renderCell: (params: any) => {
-        if (user.role !== 'admin') return null;
-        const row = params.row;
-        return (
-          <>
-            <Button
-              variant="outlined"
-              size="small"
-              onClick={() => handleEdit(row)}
-              sx={{ mr: 1 }}
-            >
-              Editar
-            </Button>
-            <Button
-              variant="outlined"
-              size="small"
-              color="error"
-              onClick={() => handleDelete(row.id)}
-            >
-              Eliminar
-            </Button>
-          </>
-        );
-      },
-    },
-  ];
 
   const handleCreate = () => {
     setEditData(null);
     setDrawerOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: Propiedad) => {
     setEditData(row);
     setDrawerOpen(true);
   };
@@ -89,43 +61,124 @@ export default function PropiedadesPage() {
     }
   };
 
-  const handleSubmit = (data: { nombre: string; tipoPropiedad: string }) => {
+  const handleSubmit = (data: {
+    nombre: string;
+    tipoPropiedad: string;
+  }) => {
     if (editData) {
-      updatePropiedad({
-        ...editData,
-        nombre: data.nombre,
-        tipoPropiedad: data.tipoPropiedad,
-      });
+      updatePropiedad({ ...editData, ...data });
     } else {
       addPropiedad(data);
     }
     setDrawerOpen(false);
   };
 
+  const columns: GridColDef[] = [
+    { field: 'nombre', headerName: 'Nombre', flex: 1 },
+    { field: 'tipoPropiedad', headerName: 'Tipo de Propiedad', flex: 1 },
+    { field: 'fechaCreacion', headerName: 'Fecha de Creación', flex: 1 },
+    {
+      field: 'acciones',
+      headerName: 'Acciones',
+      sortable: false,
+      flex: 1,
+      minWidth: 180,
+      renderCell: (params) => {
+        if (user?.role !== 'admin') return null;
+        const row = params.row as Propiedad;
+        return (
+          <>
+            <Button
+              size="small"
+              variant="outlined"
+              color="secondary"
+              onClick={() => handleEdit(row)}
+              sx={{ mr: 1 }}
+            >
+              Editar
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              color="error"
+              onClick={() => handleDelete(row.id)}
+            >
+              Eliminar
+            </Button>
+          </>
+        );
+      }
+    }
+  ];
+
   return (
-    <Box sx={{ p: 2 }}>
-      <h2>Gestión de Propiedades</h2>
-      <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
+        <Button
+          component={NextLink}
+          href="/"
+          variant="outlined"
+          color="secondary"
+          startIcon={<ArrowBackIcon />}
+        >
+          Volver
+        </Button>
+        <Typography variant="h2" color="secondary.main">
+          Gestión de Propiedades
+        </Typography>
+      </Stack>
+
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        spacing={2}
+        alignItems="center"
+        sx={{ mb: 3 }}
+      >
         <TextField
           label="Buscar Propiedades"
+          variant="outlined"
+          size="small"
+          color="secondary"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setSearch(e.target.value)
+          }
+          sx={{ flex: 1 }}
         />
-        {user.role === 'admin' && (
-          <Button variant="contained" onClick={handleCreate}>
+        {user?.role === 'admin' && (
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<AddIcon />}
+            onClick={handleCreate}
+          >
             Crear Propiedad
           </Button>
         )}
-      </Box>
+      </Stack>
 
-      <Box sx={{ height: 400, width: '100%' }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          getRowId={(row: any) => row.id}
-          pageSizeOptions={[5, 10]}
-        />
-      </Box>
+      <Paper
+        elevation={3}
+        sx={{ bgcolor: 'background.paper', borderRadius: 2, overflow: 'hidden' }}
+      >
+        <Box sx={{ height: 500, width: '100%' }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            getRowId={(row) => row.id}
+            pageSizeOptions={[5, 10]}
+            initialState={{ pagination: { paginationModel: { pageSize: 5 } } }}
+            sx={{
+              '.MuiDataGrid-columnHeaders, .MuiDataGrid-footerContainer': {
+                borderColor: 'secondary.main'
+              },
+              '.MuiDataGrid-cell': {
+                borderColor: 'secondary.main'
+              }
+            }}
+          />
+        </Box>
+      </Paper>
 
       <DrawerFormPropiedad
         open={drawerOpen}
@@ -133,6 +186,6 @@ export default function PropiedadesPage() {
         onSubmit={handleSubmit}
         initialData={editData}
       />
-    </Box>
+    </Container>
   );
 }
