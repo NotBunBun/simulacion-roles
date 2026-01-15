@@ -1,0 +1,293 @@
+[
+  {
+    "id": 1,
+    "nombre": "iPhone 15 Pro Max",
+    "tipoId": 1,
+    "descripcion": "Smartphone premium con chip A17 Pro, pantalla Super Retina XDR de 6.7 pulgadas, cámara profesional de 48MP y diseño en titanio",
+    "precio": 5499000,
+    "stock": 45,
+    "propiedadValores": {
+      "1": "Apple",
+      "2": "Titanio Natural",
+      "4": 4499000,
+      "5": 45,
+      "8": true,
+      "9": false,
+      "10": 12,
+      "13": "iPhone 15 Pro Max",
+      "15": true
+    },
+    "createdAt": "2025-01-20T10:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "nombre": "Samsung Galaxy S24 Ultra",
+    "tipoId": 1,
+    "descripcion": "Flagship Android con S-Pen integrado, cámara de 200MP, pantalla AMOLED 2X de 6.8 pulgadas y batería de 5000mAh",
+    "precio": 4899000,
+    "stock": 32,
+    "propiedadValores": {
+      "1": "Samsung",
+      "2": "Negro Fantasma",
+      "4": 4899000,
+      "5": 32,
+      "8": true,
+      "9": true,
+      "10": 24,
+      "13": "Galaxy S24 Ultra",
+      "15": true
+    },
+    "createdAt": "2025-01-20T10:15:00.000Z"
+  },
+  {
+    "id": 3,
+    "nombre": "Camisa Casual Slim Fit",
+    "tipoId": 2,
+    "descripcion": "Camisa elegante de algodón premium con corte slim fit, ideal para ocasiones formales o casuales",
+    "precio": 189900,
+    "stock": 120,
+    "propiedadValores": {
+      "1": "Tommy Hilfiger",
+      "2": "Azul Marino",
+      "3": "M",
+      "4": 189900,
+      "5": 120,
+      "8": true,
+      "9": false,
+      "11": "Algodón 100%"
+    },
+    "createdAt": "2025-01-20T10:30:00.000Z"
+  },
+  {
+    "id": 4,
+    "nombre": "Jeans Denim Classic",
+    "tipoId": 2,
+    "descripcion": "Pantalón de mezclilla clásico con corte recto, diseño atemporal y acabado resistente",
+    "precio": 249900,
+    "stock": 85,
+    "propiedadValores": {
+      "1": "Levi's",
+      "2": "Azul Índigo",
+      "3": "32",
+      "4": 249900,
+      "5": 85,
+      "8": true,
+      "9": true,
+      "11": "Denim 98% Algodón"
+    },
+    "createdAt": "2025-01-20T10:45:00.000Z"
+  },
+  {
+    "id": 5,
+    "nombre": "Sofá Modular Seccional",
+    "tipoId": 3,
+    "descripcion": "Sofá de esquina de 5 plazas con tapizado en tela premium, estructura de madera maciza y cojines de espuma de alta densidad",
+    "precio": 6299000,
+    "stock": 12,
+    "propiedadValores": {
+      "1": "IKEA",
+      "2": "Gris Claro",
+      "4": 6299000,
+      "5": 12,
+      "6": 85.5,
+      "8": true,
+      "11": "Tela y Madera",
+      "12": "280x200x85 cm",
+      "15": true
+    },
+    "createdAt": "2025-01-20T11:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "nombre": "Mesa de Comedor Extensible",
+    "tipoId": 3,
+    "descripcion": "Mesa de comedor de madera roble con sistema de extensión para 6-8 personas, diseño minimalista escandinavo",
+    "precio": 2499000,
+    "stock": 18,
+    "propiedadValores": {
+      "1": "West Elm",
+      "2": "Roble Natural",
+      "4": 2499000,
+      "5": 18,
+      "6": 42,
+      "8": true,
+      "11": "Madera Roble",
+      "12": "160-200x90x75 cm",
+      "15": true
+    },
+    "createdAt": "2025-01-20T11:15:00.000Z"
+  },
+  {
+    "id": 7,
+    "nombre": "Refrigerador French Door",
+    "tipoId": 4,
+    "descripcion": "Refrigerador de lujo con dispensador de agua y hielo, control de temperatura inteligente y compartimentos ajustables",
+    "precio": 9599000,
+    "stock": 8,
+    "propiedadValores": {
+      "1": "LG",
+      "4": 9599000,
+      "5": 8,
+      "6": 145,
+      "7": "2024-11-15",
+      "8": true,
+      "10": 24,
+      "13": "LFX28968ST",
+      "14": 450,
+      "15": true
+    },
+    "createdAt": "2025-01-20T11:30:00.000Z"
+  },
+  {
+    "id": 8,
+    "nombre": "Lavadora Carga Frontal 18kg",
+    "tipoId": 4,
+    "descripcion": "Lavadora inteligente con tecnología inverter, 14 programas de lavado, función vapor y bajo consumo energético",
+    "precio": 3799000,
+    "stock": 15,
+    "propiedadValores": {
+      "1": "Samsung",
+      "4": 3799000,
+      "5": 15,
+      "6": 72,
+      "7": "2024-12-01",
+      "8": true,
+      "10": 12,
+      "13": "WF18T6000GW",
+      "14": 2100,
+      "15": true
+    },
+    "createdAt": "2025-01-20T11:45:00.000Z"
+  },
+  {
+    "id": 9,
+    "nombre": "Zapatillas Running Pro",
+    "tipoId": 5,
+    "descripcion": "Zapatillas de alto rendimiento con tecnología de amortiguación React, diseño transpirable y suela antideslizante",
+    "precio": 549900,
+    "stock": 65,
+    "propiedadValores": {
+      "1": "Nike",
+      "2": "Negro/Blanco",
+      "3": "42",
+      "4": 549900,
+      "5": 65,
+      "8": true,
+      "9": true,
+      "11": "Malla y Espuma React"
+    },
+    "createdAt": "2025-01-20T12:00:00.000Z"
+  },
+  {
+    "id": 10,
+    "nombre": "Botas de Cuero Premium",
+    "tipoId": 5,
+    "descripcion": "Botas casuales de cuero genuino con suela de goma antideslizante, ideales para clima frío y uso diario",
+    "precio": 749900,
+    "stock": 40,
+    "propiedadValores": {
+      "1": "Timberland",
+      "2": "Marrón",
+      "3": "41",
+      "4": 749900,
+      "5": 40,
+      "8": true,
+      "9": false,
+      "11": "Cuero Genuino"
+    },
+    "createdAt": "2025-01-20T12:15:00.000Z"
+  },
+  {
+    "id": 11,
+    "nombre": "Smartwatch Series 9",
+    "tipoId": 6,
+    "descripcion": "Reloj inteligente con monitoreo de salud 24/7, GPS integrado, resistencia al agua 50m y batería de 36 horas",
+    "precio": 1699000,
+    "stock": 55,
+    "propiedadValores": {
+      "1": "Apple",
+      "2": "Medianoche",
+      "4": 1699000,
+      "5": 55,
+      "8": true,
+      "9": false,
+      "11": "Aluminio y Silicona",
+      "15": true
+    },
+    "createdAt": "2025-01-20T12:30:00.000Z"
+  },
+  {
+    "id": 12,
+    "nombre": "Mancuernas Ajustables 24kg",
+    "tipoId": 7,
+    "descripcion": "Set de mancuernas ajustables profesionales con rango de 2.5kg a 24kg por mancuerna, incluye base de almacenamiento",
+    "precio": 1449000,
+    "stock": 22,
+    "propiedadValores": {
+      "1": "Bowflex",
+      "2": "Negro",
+      "4": 1449000,
+      "5": 22,
+      "6": 19.5,
+      "8": true,
+      "9": true,
+      "11": "Acero y Caucho",
+      "15": true
+    },
+    "createdAt": "2025-01-20T12:45:00.000Z"
+  },
+  {
+    "id": 13,
+    "nombre": "Taladro Inalámbrico 20V",
+    "tipoId": 8,
+    "descripcion": "Taladro percutor profesional con batería de litio 20V, chuck de 13mm, 2 velocidades y maletín de transporte",
+    "precio": 629900,
+    "stock": 38,
+    "propiedadValores": {
+      "1": "DeWalt",
+      "4": 629900,
+      "5": 38,
+      "6": 1.8,
+      "8": true,
+      "10": 36,
+      "11": "Metal y Plástico ABS",
+      "15": true
+    },
+    "createdAt": "2025-01-20T13:00:00.000Z"
+  },
+  {
+    "id": 14,
+    "nombre": "Set Herramientas 108 Piezas",
+    "tipoId": 8,
+    "descripcion": "Kit completo de herramientas manuales con maleta organizadora, incluye destornilladores, llaves, alicates y accesorios",
+    "precio": 379900,
+    "stock": 50,
+    "propiedadValores": {
+      "1": "Stanley",
+      "4": 379900,
+      "5": 50,
+      "6": 5.2,
+      "8": true,
+      "10": 12,
+      "11": "Acero Cromo-Vanadio",
+      "15": true
+    },
+    "createdAt": "2025-01-20T13:15:00.000Z"
+  },
+  {
+    "id": 1767645982066,
+    "nombre": "Monopoly",
+    "tipoId": 1767645930691,
+    "descripcion": "monopoly description",
+    "precio": 150000,
+    "stock": 23,
+    "propiedadValores": {
+      "3": "S",
+      "4": 150000,
+      "5": 23,
+      "6": 1,
+      "9": true
+    },
+    "createdAt": "2026-01-05T20:46:22.066Z"
+  }
+]

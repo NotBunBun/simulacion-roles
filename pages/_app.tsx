@@ -4,7 +4,7 @@ import { ThemeProvider, CssBaseline } from '@mui/material'
 import theme from '../src/app/theme'
 import { AuthProvider } from '../src/app/context/AuthContext'
 import { DataProvider } from '../src/app/context/DataContext'
-import Layout from '../src/app/components/Layout'
+import Layout from '../src/app/components/layout/Layout'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

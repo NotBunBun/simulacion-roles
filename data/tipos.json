@@ -1,18 +1,148 @@
 [
   {
-    "id": 1747874194683,
-    "nombre": "111",
-    "descripcion": "111",
-    "propiedades": [],
-    "createdAt": "2025-05-22T00:36:34.683Z"
+    "id": 1,
+    "nombre": "Electrónica",
+    "descripcion": "Dispositivos y equipos electrónicos como smartphones, tablets, computadoras y accesorios tecnológicos",
+    "propiedades": [
+      1,
+      2,
+      4,
+      5,
+      10,
+      13,
+      8,
+      9,
+      15
+    ],
+    "createdAt": "2025-01-16T09:00:00.000Z"
   },
   {
-    "id": 1747874630888,
-    "nombre": "Ola",
-    "descripcion": "prueba",
+    "id": 2,
+    "nombre": "Ropa y Vestir",
+    "descripcion": "Prendas de vestir para todas las edades incluyendo camisas, pantalones, vestidos y ropa deportiva",
     "propiedades": [
-      1747874492595
+      1,
+      2,
+      3,
+      4,
+      5,
+      11,
+      8,
+      9
     ],
-    "createdAt": "2025-05-22T00:43:50.888Z"
+    "createdAt": "2025-01-16T09:15:00.000Z"
+  },
+  {
+    "id": 3,
+    "nombre": "Muebles y Decoración",
+    "descripcion": "Muebles para el hogar y oficina, artículos decorativos y elementos de confort",
+    "propiedades": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      11,
+      12,
+      8,
+      15
+    ],
+    "createdAt": "2025-01-16T09:30:00.000Z"
+  },
+  {
+    "id": 4,
+    "nombre": "Electrodomésticos",
+    "descripcion": "Aparatos eléctricos para el hogar como refrigeradores, lavadoras, microondas y ventiladores",
+    "propiedades": [
+      1,
+      4,
+      5,
+      6,
+      10,
+      13,
+      14,
+      7,
+      8,
+      15
+    ],
+    "createdAt": "2025-01-16T09:45:00.000Z"
+  },
+  {
+    "id": 5,
+    "nombre": "Calzado",
+    "descripcion": "Zapatos, zapatillas deportivas, botas y sandalias para diferentes actividades y ocasiones",
+    "propiedades": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      11,
+      8,
+      9
+    ],
+    "createdAt": "2025-01-16T10:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "nombre": "Accesorios y Joyería",
+    "descripcion": "Relojes, joyas, billeteras, cinturones y otros accesorios personales",
+    "propiedades": [
+      1,
+      2,
+      4,
+      5,
+      11,
+      8,
+      9,
+      15
+    ],
+    "createdAt": "2025-01-16T10:15:00.000Z"
+  },
+  {
+    "id": 7,
+    "nombre": "Deportes y Fitness",
+    "descripcion": "Equipamiento deportivo, ropa deportiva, suplementos y accesorios para ejercicio y actividades al aire libre",
+    "propiedades": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      11,
+      8,
+      9,
+      15
+    ],
+    "createdAt": "2025-01-16T10:30:00.000Z"
+  },
+  {
+    "id": 8,
+    "nombre": "Herramientas y Ferretería",
+    "descripcion": "Herramientas eléctricas y manuales, materiales de construcción y artículos de ferretería",
+    "propiedades": [
+      1,
+      4,
+      5,
+      6,
+      10,
+      11,
+      8,
+      15
+    ],
+    "createdAt": "2025-01-16T10:45:00.000Z"
+  },
+  {
+    "id": 1767645930691,
+    "nombre": "Board Games",
+    "descripcion": "12345",
+    "propiedades": [
+      9,
+      3,
+      4,
+      5,
+      6
+    ],
+    "createdAt": "2026-01-05T20:45:30.691Z"
   }
 ]
